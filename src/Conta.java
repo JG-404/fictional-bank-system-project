@@ -21,23 +21,27 @@ public class Conta implements Cloneable{
 
     public void sacar(int valor) throws Exception{
         if (valor <= 0) throw new Exception("Valor invalido, insira um valor acima de 0");
-        if (valor > saldo) throw new Exception("Saldo o insuficiente");
+        if (valor > this.saldo) throw new Exception("Saldo o insuficiente");
 
         this.saldo -= valor;
     }
 
+    public int getNumeroConta(){
+        return this.numeroConta;
+    }
+
     @Override
     public String toString(){
-        return "Conta de: " + nomeTitular + "\nNumero da conta: " + numeroConta + "\n Saldo: " + saldo;
+        return "Conta de: " + this.nomeTitular + "\nNumero da conta: " + this.numeroConta + "\n Saldo: " + this.saldo + "\n ________________________________________________";
     }
 
     @Override
     public int hashCode(){
         int ret = 1;
 
-        ret = ret * 3 + ((Integer)numeroConta).hashCode();
-        ret = ret * 3 + nomeTitular.hashCode();
-        ret = ret * 3 + ((Integer)saldo).hashCode();
+        ret = ret * 3 + ((Integer)this.numeroConta).hashCode();
+        ret = ret * 3 + this.nomeTitular.hashCode();
+        ret = ret * 3 + ((Integer)this.saldo).hashCode();
 
         if (ret < 0) ret = -ret;
         return ret;
