@@ -47,6 +47,7 @@ public class Conta implements Cloneable{
         return ret;
     }
 
+    @Override
     public boolean equals(Object obj){
         if (obj == null) return false;
         if (obj == this) return true;
@@ -66,6 +67,7 @@ public class Conta implements Cloneable{
         this.saldo = modelo.saldo;
     }
 
+    @Override
     public Object clone(){
         Object ret = null;
         try{
