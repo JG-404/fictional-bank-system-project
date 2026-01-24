@@ -2,7 +2,7 @@ public class Conta implements Cloneable{
     private int numeroConta;
     private String nomeTitular;
     private int saldo;
-    private static int qtdContas = 0;
+    private static int qtdContas = 0; //contador de contas que sera utilizado para definir o numero de cada conta
 
     public Conta(String nomeTitular) throws Exception{
         if (nomeTitular.isBlank() || nomeTitular.equals(null)) throw new Exception("Nome vazio");
@@ -13,12 +13,14 @@ public class Conta implements Cloneable{
         this.saldo = 0;
     }
 
+    //realiza os depositos
     public void depositar(int valor) throws Exception{
         if (valor <= 0) throw new Exception("Valor invalido, insira um valor acima de 0");
 
         this.saldo += valor;
     }
 
+    //realiza os saques
     public void sacar(int valor) throws Exception{
         if (valor <= 0) throw new Exception("Valor invalido, insira um valor acima de 0");
         if (valor > this.saldo) throw new Exception("Saldo o insuficiente");
@@ -26,13 +28,15 @@ public class Conta implements Cloneable{
         this.saldo -= valor;
     }
 
+    //getter para retornar o numero da conta
     public int getNumeroConta(){
         return this.numeroConta;
     }
 
+    //daqui pra baixo eu reescrevi os metodos da classe Object
     @Override
     public String toString(){
-        return "Conta de: " + this.nomeTitular + "\nNumero da conta: " + this.numeroConta + "\n Saldo: " + this.saldo + "\n ________________________________________________";
+        return "Conta de: " + this.nomeTitular + "\nNumero da conta: " + this.numeroConta + "\nSaldo: " + this.saldo + "\n=======================";
     }
 
     @Override
@@ -59,6 +63,7 @@ public class Conta implements Cloneable{
         return true;
     }
 
+    //construtor de copia
     public Conta(Conta modelo) throws Exception{
         if (modelo == null) throw new Exception("Modelo vazio");
 

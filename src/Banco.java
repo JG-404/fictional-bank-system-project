@@ -1,37 +1,42 @@
 import java.util.*;
 
 public class Banco implements Cloneable{
-    private List<Conta> conta = new ArrayList<>();
+    private List<Conta> conta = new ArrayList<>(); //array para guardar as contas criadas
 
-    public Banco()
+    public Banco() //construtor vazio pq array já é inicializado por padrão
     {}
 
+    //função para criar contas novas e adicionar elas ao array
     public void criaConta(String nomeTitular) throws Exception{
-        if (nomeTitular.isBlank() || nomeTitular == null) throw new Exception("Nome vazio");
+        if (nomeTitular == null || nomeTitular.isBlank()) throw new Exception("Nome vazio");
 
         Conta novaConta = new Conta(nomeTitular);
         this.conta.add(novaConta);
     }
 
-    public Conta encontraConta(int numeroConta) throws Exception{
+    //essa função procura uma conta e retorna se ela foi encontrada e retorna ela mesma
+    public Object[] encontraConta(int numeroConta) throws Exception{
         if (numeroConta <= 0) throw new Exception("Numero invalido");
 
-        Conta ret = null;
+        Conta contaEncontrada = null;
 
         for (int i = 0; i < this.conta.size(); i++){
             if (this.conta.get(i).getNumeroConta() == numeroConta){
                 try{
-                    ret = new Conta((Conta)this.conta.get(i));
+                    contaEncontrada = new Conta(this.conta.get(i));
                 }
-                catch(Exception error)
+                catch(Exception error) //conta nunca vai ser null
                 {}
+                Object[] ret = {true, contaEncontrada};
                 return ret;
             }
         }
 
-        throw new Exception("Conta inexistente");
+        Object[] ret = {false};
+        return ret;
     }
 
+    //daqui pra baixo eu reescrevi os metodos da classe Object
     @Override
     public String toString(){
         String todasContas = "";
@@ -70,6 +75,7 @@ public class Banco implements Cloneable{
         return true;
     }
 
+    //Construtor de copia
     public Banco(Banco modelo) throws Exception{
         if (modelo == null) throw new Exception("Modelo vazio");
 
