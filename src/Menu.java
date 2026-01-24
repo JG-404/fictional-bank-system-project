@@ -1,4 +1,3 @@
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
@@ -62,11 +61,11 @@ public class Menu {
                 Object[] procurou = procuraOpção(opcao, opcoes);
                 boolean achou = (boolean)procurou[0];
 
-                if (!achou) throw new InputMismatchException("Opção invalida");
+                if (!achou) throw new Exception("Opção invalida");
                 OpcaoAcoes escolha = (OpcaoAcoes)procurou[1];
                 return escolha;
             }
-            catch(InputMismatchException error){
+            catch(Exception error){
                 System.err.println(error.getMessage());
                 teclado.next();
             }
